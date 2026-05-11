@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UrinAnalytics — Sistem Deteksi Dehidrasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --surface: #141e2a;
+    --surface2: #1a2638;
+    --border: rgba(0,200,255,0.12);
+    --border2: rgba(0,200,255,0.25);
+    --cyan: #00c8ff;
+    --cyan-dim: rgba(0,200,255,0.15);
+    --cyan-glow: rgba(0,200,255,0.08);
+    --green: #00ff94;
+    --green-dim: rgba(0,255,148,0.12);
+    --amber: #ffb800;
+    --amber-dim: rgba(255,184,0,0.12);
+    --red: #ff4444;
+    --red-dim: rgba(255,68,68,0.12);
+    --text: #e8f4f8;
+    --text2: #8aabb8;
+    --text3: #4a6578;
+    --mono: 'Space Mono', monospace;
+    --display: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID LINES BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,12,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-brand {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-brand .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* MAIN LAYOUT */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border: 1px solid var(--border2);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 span { color: var(--cyan); }
+
+  .hero p {
+    color: var(--text2);
+    font-size: 15px;
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 500px;
+  }
+
+  .stat-box {
+    background: var(--surface);
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .stat-box .val {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--cyan);
+  }
+
+  .stat-box .lbl {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .section-num {
+    font-size: 11px;
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border: 1px solid var(--border2);
+    padding: 3px 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  section {
+    margin-bottom: 5rem;
+    scroll-margin-top: 80px;
+  }
+
+  /* URINE COLOR INDICATOR */
+  .color-indicator-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .color-scale {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .scale-title {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+
+  .color-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+
+  .color-row:hover, .color-row.active {
+    border-color: var(--border2);
+    background: rgba(0,200,255,0.05);
+  }
+
+  .color-swatch {
+    width: 44px;
+    height: 28px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .color-info { flex: 1; }
+
+  .color-label {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .color-ph {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  .color-status-badge {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .badge-normal { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,255,148,0.2); }
+  .badge-mild { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(255,184,0,0.2); }
+  .badge-severe { background: var(--red-dim); color: var(--red); border: 1px solid rgba(255,68,68,0.2); }
+
+  .color-detail-panel {
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    padding: 1.5rem;
+    position: sticky;
+    top: 80px;
+  }
+
+  .detail-color-preview {
+    width: 100%;
+    height: 120px;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    transition: background 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .detail-cell {
+    background: var(--bg3);
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+  }
+
+  .detail-cell .dk {
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .detail-cell .dv {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .detail-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  /* RGB BAR */
+  .rgb-bars { margin-top: 0.8rem; }
+  .rgb-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .rgb-label { font-size: 10px; width: 12px; color: var(--text3); }
+  .rgb-bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 1px; overflow: hidden; }
+  .rgb-bar-fill { height: 100%; border-radius: 1px; transition: width 0.4s; }
+  .rgb-val { font-size: 10px; color: var(--text3); width: 28px; text-align: right; }
+
+  /* CHECKER / CALCULATOR */
+  .checker-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .checker-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+  }
+
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    flex: 1;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid var(--border);
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--cyan);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+
+  .slider-val {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cyan);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  .checker-result {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    position: sticky;
+    top: 80px;
+  }
+
+  .result-status {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+  }
+
+  .result-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-top: 0.8rem;
+  }
+
+  .result-meter {
+    margin: 1.2rem 0;
+  }
+
+  .meter-track {
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .meter-fill {
+    height: 100%;
+    border-radius: 1px;
+    transition: width 0.5s, background 0.5s;
+  }
+
+  .meter-ticks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .result-rgb-preview {
+    width: 100%;
+    height: 60px;
+    border-radius: 2px;
+    margin-top: 1rem;
+    transition: background 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+
+  /* DATA TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead { background: var(--surface2); }
+
+  th {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-weight: 400;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(0,200,255,0.05);
+    font-size: 12px;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--cyan-glow); }
+
+  .td-sample {
+    font-family: var(--display);
+    font-weight: 700;
+    color: var(--cyan);
+    font-size: 14px;
+  }
+
+  .td-ph { font-family: var(--display); font-weight: 700; }
+
+  .rgb-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rgb-dot {
+    width: 24px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .rgb-code {
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  /* SENSOR CARDS */
+  .sensor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .sensor-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sensor-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .sensor-card.cyan::before { background: var(--cyan); }
+  .sensor-card.green::before { background: var(--green); }
+
+  .sensor-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border2);
+    background: var(--cyan-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 20px;
+  }
+
+  .sensor-icon-wrap.green-bg {
+    background: var(--green-dim);
+    border-color: rgba(0,255,148,0.2);
+  }
+
+  .sensor-name {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .sensor-model {
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .sensor-model.green { color: var(--green); }
+
+  .sensor-spec-list {
+    list-style: none;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .sensor-spec-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,200,255,0.04);
+    font-size: 12px;
+  }
+
+  .spec-k { color: var(--text3); }
+  .spec-v { color: var(--text); font-weight: 700; }
+
+  .sensor-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.8;
+  }
+
+  /* METHODOLOGY */
+  .method-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .method-step {
+    flex: 1;
+    min-width: 160px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    position: relative;
+  }
+
+  .method-step + .method-step {
+    border-left: none;
+  }
+
+  .step-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--surface2);
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    line-height: 1;
+  }
+
+  .step-icon {
+    font-size: 22px;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.6;
+  }
+
+  .step-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--cyan);
+    font-size: 16px;
+    padding: 0 4px;
+    align-self: center;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: var(--display);
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  .footer-meta {
+    font-size: 11px;
+    color: var(--text3);
+    text-align: right;
+  }
+
+  /* ANIMATE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { animation: fadeUp 0.6s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+  /* SCAN LINE effect on hero */
+  .scanline {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,200,255,0.015) 2px,
+      rgba(0,200,255,0.015) 4px
+    );
+    pointer-events: none;
+  }
+
+  .error-rate {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-dim);
+    border: 1px solid rgba(0,255,148,0.2);
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    color: var(--green);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="dot"></div>
+    URIN<span style="color:var(--text2)">ANALYTICS</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#indikator">Indikator</a></li>
+    <li><a href="#checker">Checker</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#sensor">Sensor</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" style="position:relative;">
+    <div class="scanline"></div>
+    <div class="hero-tag fade-in">
+      ⬡ Sistem Deteksi Dehidrasi — ELECTRICES 2020
+    </div>
+    <h1 class="fade-in delay-1">Deteksi <span>Dehidrasi</span><br>Melalui Analisis Urin</h1>
+    <p class="fade-in delay-2">
+      Sistem berbasis sensor pH H-101 dan TCS3200 untuk mengklasifikasikan tingkat dehidrasi secara otomatis melalui pengukuran keasaman dan warna urin pada instalasi urinoir cerdas.
+    </p>
+    <div class="hero-stats fade-in delay-3">
+      <div class="stat-box">
+        <div class="val">12</div>
+        <div class="lbl">Sampel Uji</div>
+      </div>
+      <div class="stat-box">
+        <div class="val">0.1</div>
+        <div class="lbl">Error Digit</div>
+      </div>
+      <div class="stat-box">
+        <div class="val">&lt;30s</div>
+        <div class="lbl">Waktu Baca</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: INDIKATOR WARNA -->
+  <section id="indikator">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Indikator Warna Urin</h2>
+    </div>
+    <p style="color:var(--text2);font-size:13px;margin-bottom:1.5rem;max-width:600px;">Klik setiap level warna untuk melihat detail pH, nilai RGB dari sensor TCS3200, dan keterangan status hidrasi.</p>
+
+    <div class="color-indicator-wrap">
+      <div>
+        <div class="scale-title">// skala warna — klik untuk detail</div>
+        <div class="color-strip" id="colorStrip">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+      <div class="color-detail-panel">
+        <div class="detail-color-preview" id="detailPreview"></div>
+        <div class="detail-grid" id="detailGrid"></div>
+        <div id="detailRgb" class="rgb-bars"></div>
+        <div class="detail-desc" id="detailDesc"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CHECKER -->
+  <section id="checker">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Kalkulator Dehidrasi</h2>
+    </div>
+    <p style="color:var(--text2);font-size:13px;margin-bottom:1.5rem;max-width:600px;">Masukkan nilai pH dan komponen RGB urin untuk mengetahui estimasi status hidrasi berdasarkan model penelitian.</p>
+
+    <div class="checker-wrap">
+      <div class="checker-panel">
+        <div class="input-group">
+          <label>Nilai pH Urin</label>
+          <div class="slider-row">
+            <input type="range" id="phSlider" min="4" max="9" step="0.1" value="6.5">
+            <span class="slider-val" id="phVal">6.5</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Komponen Red (R)</label>
+          <div class="slider-row">
+            <input type="range" id="rSlider" min="0" max="255" step="1" value="220">
+            <span class="slider-val" id="rVal">220</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Komponen Green (G)</label>
+          <div class="slider-row">
+            <input type="range" id="gSlider" min="0" max="255" step="1" value="150">
+            <span class="slider-val" id="gVal">150</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Komponen Blue (B)</label>
+          <div class="slider-row">
+            <input type="range" id="bSlider" min="0" max="255" step="1" value="30">
+            <span class="slider-val" id="bVal">30</span>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:0.5rem;border-top:1px solid var(--border);padding-top:0.8rem;">
+          * Estimasi berdasarkan referensi pH normal: 5.5–7.5 (Verdiansyah, 2016)
+        </div>
+      </div>
+
+      <div class="checker-result">
+        <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);">Status Hidrasi</div>
+        <div class="result-status" id="resultStatus">—</div>
+        <div id="resultBadge" style="margin-bottom:0.8rem;"></div>
+        <div class="result-meter">
+          <div class="meter-track"><div class="meter-fill" id="meterFill" style="width:0%"></div></div>
+          <div class="meter-ticks">
+            <span>Normal</span><span>Ringan</span><span>Berat</span>
+          </div>
+        </div>
+        <div class="result-desc" id="resultDesc"></div>
+        <div class="result-rgb-preview" id="rgbPreview"></div>
+        <div style="margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem;">
+          <div style="font-size:10px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">pH Sensor Reading</div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <div style="flex:1;background:var(--surface2);height:4px;border-radius:1px;overflow:hidden;">
+              <div id="phBar" style="height:100%;background:var(--cyan);transition:width 0.5s;width:50%"></div>
+            </div>
+            <span id="phBarLabel" style="font-family:var(--display);font-weight:700;font-size:13px;color:var(--cyan);">6.5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: DATA TABLE -->
+  <section id="data">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Data Pengukuran</h2>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <p style="color:var(--text2);font-size:13px;">Hasil deteksi 12 sampel urin menggunakan sensor pH H-101 dan TCS3200.</p>
+      <span class="error-rate">⬡ Error rata-rata: 0.1 digit</span>
+    </div>
+    <div class="table-wrap">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Sampel</th>
+            <th>pH H-101</th>
+            <th>pH Meter</th>
+            <th>Error (%)</th>
+            <th>Warna RGB</th>
+            <th>R</th><th>G</th><th>B</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SENSOR -->
+  <section id="sensor">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Spesifikasi Sensor</h2>
+    </div>
+    <div class="sensor-grid" style="margin-bottom:2rem;">
+
+      <div class="sensor-card cyan">
+        <div class="sensor-icon-wrap">⚗</div>
+        <div class="sensor-name">Sensor Keasaman</div>
+        <div class="sensor-model">PH H-101</div>
+        <div class="sensor-desc">Sensor pH analog yang mengukur konsentrasi ion hidrogen dalam larutan. Pada penelitian ini digunakan untuk mendeteksi keasaman urin secara langsung saat urin tertampung di urinoir, menghindari kesalahan baca akibat pengaruh warna makanan.</div>
+        <ul class="sensor-spec-list">
+          <li><span class="spec-k">Akurasi vs pH Meter</span><span class="spec-v">±0.1 digit</span></li>
+          <li><span class="spec-k">Media</span><span class="spec-v">Terendam dalam urin</span></li>
+          <li><span class="spec-k">Output</span><span class="spec-v">Nilai pH numerik</span></li>
+          <li><span class="spec-k">Mikrokontroler</span><span class="spec-v">Arduino Nano</span></li>
+          <li><span class="spec-k">Waktu deteksi</span><span class="spec-v">&lt; 30 detik</span></li>
+        </ul>
+      </div>
+
+      <div class="sensor-card green">
+        <div class="sensor-icon-wrap green-bg">🎨</div>
+        <div class="sensor-name">Sensor Warna</div>
+        <div class="sensor-model green">TCS3200</div>
+        <div class="sensor-desc">Sensor warna RGB yang mendeteksi intensitas cahaya merah, hijau, dan biru melalui fotodioda terfilter. Sensitif terhadap perubahan warna urin namun juga dipengaruhi oleh intensitas cahaya dan zat warna dari makanan.</div>
+        <ul class="sensor-spec-list">
+          <li><span class="spec-k">Output</span><span class="spec-v">Nilai R, G, B (0–255)</span></li>
+          <li><span class="spec-k">Klasifikasi</span><span class="spec-v">RGB Color Space</span></li>
+          <li><span class="spec-k">Kelemahan</span><span class="spec-v">Dipengaruhi intensitas cahaya</span></li>
+          <li><span class="spec-k">Mikrokontroler</span><span class="spec-v">Arduino Nano</span></li>
+          <li><span class="spec-k">Konverter</span><span class="spec-v">C-to-F Converter</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY FLOW -->
+    <div style="margin-top:2.5rem;">
+      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;">// alur sistem urinoir</div>
+      <div class="method-flow">
+        <div class="method-step">
+          <div class="step-num">01</div>
+          <div class="step-icon">🚶</div>
+          <div class="step-title">Pengguna Terdeteksi</div>
+          <div class="step-desc">Sensor infrared mendeteksi jarak pengguna. Control valve menutup saluran pembuangan.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">02</div>
+          <div class="step-icon">🧪</div>
+          <div class="step-title">Urin Tertampung</div>
+          <div class="step-desc">Urin tertampung (±100ml) di saluran penampungan untuk proses deteksi sensor.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">03</div>
+          <div class="step-icon">📡</div>
+          <div class="step-title">Baca Sensor</div>
+          <div class="step-desc">Sensor pH H-101 dan TCS3200 aktif secara bersamaan membaca nilai keasaman dan warna.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">04</div>
+          <div class="step-icon">🖥</div>
+          <div class="step-title">Proses &amp; Tampil</div>
+          <div class="step-desc">Arduino Nano memproses data. Hasil status dehidrasi ditampilkan di LCD dalam &lt;30 detik.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">05</div>
+          <div class="step-icon">💧</div>
+          <div class="step-title">Bilas Otomatis</div>
+          <div class="step-desc">Setelah pengguna pergi, valve terbuka, pompa air aktif membilas urinoir selama 8 detik.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pH REFERENCE -->
+    <div style="margin-top:2.5rem;background:var(--surface);border:1px solid var(--border);padding:1.5rem;">
+      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;">// referensi nilai pH urin</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);">
+        <div style="background:var(--red-dim);border:1px solid rgba(255,68,68,0.15);padding:1rem;text-align:center;">
+          <div style="font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--red);">pH &lt; 5.5</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;">Dehidrasi Berat</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:8px;">Sangat asam, perlu perhatian segera</div>
+        </div>
+        <div style="background:var(--amber-dim);border:1px solid rgba(255,184,0,0.15);padding:1rem;text-align:center;">
+          <div style="font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--amber);">5.5 – 7.5</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;">Dehidrasi Ringan</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:8px;">Perlu peningkatan asupan cairan</div>
+        </div>
+        <div style="background:var(--green-dim);border:1px solid rgba(0,255,148,0.15);padding:1rem;text-align:center;">
+          <div style="font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--green);">pH &gt; 7.5</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;">Tidak Dehidrasi</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:8px;">Hidrasi tubuh dalam kondisi baik</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:0.8rem;">
+        Sumber: Verdiansyah (2016) — pH normal manusia: 5.5–7.5 | American Association for Clinical Chemistry: pH normal rata-rata 6.0
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <div class="footer-brand">URINANALYTICS</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:4px;">Sistem Pendeteksi Keasaman &amp; Warna Urin</div>
+  </div>
+  <div class="footer-meta">
+    Berdasarkan penelitian Rohman K, et al.<br>
+    ELECTRICES Vol. 2 No. 2, 2020 — Politeknik Negeri Jakarta
+  </div>
+</footer>
+
+<script>
+const colorData = [
+  {
+    label: 'Kuning Gelap Kecoklatan',
+    swatch: 'rgb(207,79,0)',
+    ph: 5.3, r: 207, g: 79, b: 0,
+    status: 'severe',
+    statusLabel: 'Dehidrasi Berat',
+    desc: 'Urin sangat pekat dengan warna coklat-oranye kuat. Komponen Red dominan (207), Green rendah (79), Blue nol. pH di bawah 5.5 menandakan keasaman tinggi. Perlu segera meningkatkan asupan cairan.'
+  },
+  {
+    label: 'Oranye Amber',
+    swatch: 'rgb(231,99,0)',
+    ph: 6.0, r: 231, g: 99, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Warna oranye menunjukkan urin cukup pekat. R dan G dominan, B=0. Meskipun pH 6.0 masih dalam batas normal rendah, disarankan minum lebih banyak air.'
+  },
+  {
+    label: 'Oranye Gelap',
+    swatch: 'rgb(207,59,0)',
+    ph: 5.5, r: 207, g: 59, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Urin oranye gelap dengan Green sangat rendah (59). pH berada tepat di batas 5.5, yaitu ambang bawah rentang normal. Konsumsi air segera sangat dianjurkan.'
+  },
+  {
+    label: 'Oranye Muda',
+    swatch: 'rgb(219,40,0)',
+    ph: 6.8, r: 219, g: 40, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Nilai R tinggi dengan G sangat rendah (40). Meskipun pH 6.8 cukup baik, warna sensor masih menunjukkan dominasi merah yang mengindikasikan dehidrasi ringan.'
+  },
+  {
+    label: 'Kuning Oranye',
+    swatch: 'rgb(219,79,0)',
+    ph: 6.4, r: 219, g: 79, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Warna kuning-oranye dengan komponen B=0. pH 6.4 dalam rentang normal namun masih menunjukkan tanda dehidrasi ringan dari kombinasi pH dan warna.'
+  },
+  {
+    label: 'Kuning Pekat',
+    swatch: 'rgb(231,99,0)',
+    ph: 6.3, r: 231, g: 99, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Nilai R sangat tinggi (231). Meskipun G meningkat (99), B masih 0. Menandakan urin cukup pekat. Konsumsi cairan lebih banyak disarankan.'
+  },
+  {
+    label: 'Kuning Sedang',
+    swatch: 'rgb(195,40,0)',
+    ph: 7.5, r: 195, g: 40, b: 0,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'pH 7.5 berada tepat di batas atas rentang normal. Warna masih cukup dominan merah. Perbatasan antara dehidrasi ringan dan tidak dehidrasi.'
+  },
+  {
+    label: 'Kuning Jernih',
+    swatch: 'rgb(233,174,6)',
+    ph: 6.8, r: 233, g: 174, b: 6,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Warna kuning lebih cerah dengan G meningkat (174) dan Blue mulai muncul (6). pH 6.8 cukup baik, namun masih dikategorikan dehidrasi ringan berdasarkan referensi penelitian.'
+  },
+  {
+    label: 'Kuning Pucat',
+    swatch: 'rgb(228,158,30)',
+    ph: 7.8, r: 228, g: 158, b: 30,
+    status: 'normal',
+    statusLabel: 'Tidak Dehidrasi',
+    desc: 'Komponen Blue mulai terlihat (30), G cukup tinggi (158). pH 7.8 melebihi 7.5, menandakan hidrasi yang baik. Tidak terindikasi dehidrasi.'
+  },
+  {
+    label: 'Kuning Terang',
+    swatch: 'rgb(255,215,60)',
+    ph: 7.0, r: 255, g: 215, b: 60,
+    status: 'normal',
+    statusLabel: 'Tidak Dehidrasi',
+    desc: 'Warna kuning terang dengan G sangat tinggi (215) dan B=60. pH 7.0 dalam rentang ideal. Ini menunjukkan kondisi hidrasi yang baik meskipun pH tidak melebihi 7.5.'
+  },
+  {
+    label: 'Kuning Sangat Pucat',
+    swatch: 'rgb(255,235,77)',
+    ph: 6.0, r: 255, g: 235, b: 77,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Kasus khusus: warna sangat terang (G=235, B=77) tetapi pH 6.0 menunjukkan dehidrasi ringan. Ini bukti bahwa warna saja tidak cukup — asupan makanan memengaruhi warna urin tanpa mengubah pH.'
+  },
+  {
+    label: 'Jernih Kekuningan',
+    swatch: 'rgb(255,255,135)',
+    ph: 6.1, r: 255, g: 255, b: 135,
+    status: 'mild',
+    statusLabel: 'Dehidrasi Ringan',
+    desc: 'Warna paling terang dalam dataset dengan B=135. Namun pH 6.1 masih menandakan dehidrasi ringan. Contoh keterbatasan sensor warna yang dipengaruhi makanan.'
+  }
+];
+
+const sampleData = [
+  {s:'A', ph_s:5.3, ph_m:5.3, err:0, r:207, g:79, b:0, status:'Dehidrasi Berat'},
+  {s:'B', ph_s:6.0, ph_m:6.0, err:0, r:231, g:99, b:0, status:'Dehidrasi Ringan'},
+  {s:'C', ph_s:5.5, ph_m:5.5, err:0, r:207, g:59, b:0, status:'Dehidrasi Ringan'},
+  {s:'D', ph_s:6.8, ph_m:6.8, err:0, r:219, g:40, b:0, status:'Dehidrasi Ringan'},
+  {s:'E', ph_s:6.4, ph_m:6.3, err:1.58, r:219, g:79, b:0, status:'Dehidrasi Ringan'},
+  {s:'F', ph_s:6.3, ph_m:6.3, err:0, r:231, g:99, b:0, status:'Dehidrasi Ringan'},
+  {s:'G', ph_s:7.5, ph_m:7.6, err:-1.31, r:195, g:40, b:0, status:'Dehidrasi Ringan'},
+  {s:'H', ph_s:6.8, ph_m:6.9, err:-1.44, r:233, g:174, b:6, status:'Dehidrasi Ringan'},
+  {s:'I', ph_s:7.8, ph_m:7.9, err:-1.26, r:228, g:158, b:30, status:'Tidak Dehidrasi'},
+  {s:'J', ph_s:7.0, ph_m:7.1, err:-1.40, r:255, g:215, b:60, status:'Tidak Dehidrasi'},
+  {s:'K', ph_s:6.0, ph_m:6.0, err:0, r:255, g:235, b:77, status:'Dehidrasi Ringan'},
+  {s:'L', ph_s:6.1, ph_m:6.2, err:-1.61, r:255, g:255, b:135, status:'Dehidrasi Ringan'}
+];
+
+// RENDER COLOR STRIP
+const strip = document.getElementById('colorStrip');
+let activeIdx = 0;
+
+colorData.forEach((d, i) => {
+  const row = document.createElement('div');
+  row.className = 'color-row' + (i === 0 ? ' active' : '');
+  row.innerHTML = `
+    <div class="color-swatch" style="background:${d.swatch}"></div>
+    <div class="color-info">
+      <div class="color-label">${d.label}</div>
+      <div class="color-ph">pH ${d.ph.toFixed(1)}</div>
+    </div>
+    <span class="color-status-badge badge-${d.status}">${d.statusLabel}</span>
+  `;
+  row.addEventListener('click', () => {
+    document.querySelectorAll('.color-row').forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+    renderDetail(d);
+  });
+  strip.appendChild(row);
+});
+
+function renderDetail(d) {
+  document.getElementById('detailPreview').style.background = d.swatch;
+  const textCol = d.ph < 6.5 ? '#fff' : '#111';
+  document.getElementById('detailPreview').style.color = textCol;
+  document.getElementById('detailPreview').textContent = d.label;
+
+  document.getElementById('detailGrid').innerHTML = `
+    <div class="detail-cell"><div class="dk">pH (Sensor)</div><div class="dv" style="color:var(--cyan)">${d.ph.toFixed(1)}</div></div>
+    <div class="detail-cell"><div class="dk">Status</div><div class="dv" style="color:${d.status==='normal'?'var(--green)':d.status==='mild'?'var(--amber)':'var(--red)'}">${d.statusLabel}</div></div>
+    <div class="detail-cell"><div class="dk">Red</div><div class="dv" style="color:#ff6b6b">${d.r}</div></div>
+    <div class="detail-cell"><div class="dk">Green</div><div class="dv" style="color:#51cf66">${d.g}</div></div>
+  `;
+
+  document.getElementById('detailRgb').innerHTML = `
+    <div style="font-size:10px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Komposisi RGB</div>
+    <div class="rgb-bar-row"><span class="rgb-label">R</span><div class="rgb-bar-track"><div class="rgb-bar-fill" style="width:${d.r/255*100}%;background:#ff6b6b"></div></div><span class="rgb-val">${d.r}</span></div>
+    <div class="rgb-bar-row"><span class="rgb-label">G</span><div class="rgb-bar-track"><div class="rgb-bar-fill" style="width:${d.g/255*100}%;background:#51cf66"></div></div><span class="rgb-val">${d.g}</span></div>
+    <div class="rgb-bar-row"><span class="rgb-label">B</span><div class="rgb-bar-track"><div class="rgb-bar-fill" style="width:${d.b/255*100}%;background:#4dabf7"></div></div><span class="rgb-val">${d.b}</span></div>
+  `;
+
+  document.getElementById('detailDesc').textContent = d.desc;
+}
+
+renderDetail(colorData[0]);
+
+// RENDER TABLE
+const tbody = document.getElementById('dataBody');
+sampleData.forEach(d => {
+  const statusColor = d.status === 'Tidak Dehidrasi' ? 'var(--green)' : d.status === 'Dehidrasi Berat' ? 'var(--red)' : 'var(--amber)';
+  const statusBg = d.status === 'Tidak Dehidrasi' ? 'var(--green-dim)' : d.status === 'Dehidrasi Berat' ? 'var(--red-dim)' : 'var(--amber-dim)';
+  const errColor = d.err === 0 ? 'var(--green)' : Math.abs(d.err) > 1 ? 'var(--amber)' : 'var(--text2)';
+  const rgb = `rgb(${d.r},${d.g},${d.b})`;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="td-sample">${d.s}</td>
+    <td class="td-ph" style="color:var(--cyan)">${d.ph_s.toFixed(1)}</td>
+    <td style="color:var(--text2)">${d.ph_m.toFixed(1)}</td>
+    <td style="color:${errColor}">${d.err === 0 ? '0.00' : d.err.toFixed(2)}%</td>
+    <td><div class="rgb-chip"><div class="rgb-dot" style="background:${rgb}"></div><span class="rgb-code">${d.r},${d.g},${d.b}</span></div></td>
+    <td style="color:#ff6b6b">${d.r}</td>
+    <td style="color:#51cf66">${d.g}</td>
+    <td style="color:#4dabf7">${d.b}</td>
+    <td><span style="background:${statusBg};color:${statusColor};font-size:10px;padding:3px 8px;letter-spacing:0.06em;border-radius:2px;white-space:nowrap">${d.status}</span></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// CHECKER
+function getStatus(ph, r, g, b) {
+  if (ph < 5.5) return {label:'Dehidrasi Berat', color:'var(--red)', pct: 90, desc:'pH sangat asam ('+ph.toFixed(1)+'). Penumpukan CO₂ dalam darah terindikasi. Segera tingkatkan asupan air. Dominasi warna R ('+r+') dan G ('+g+') rendah memperkuat indikasi ini.'};
+  if (ph > 7.5) return {label:'Tidak Dehidrasi', color:'var(--green)', pct: 10, desc:'pH '+ph.toFixed(1)+' dalam kondisi basa ringan — hidrasi baik. Komponen Blue ('+b+') yang lebih tinggi mendukung indikasi urin tidak terlalu pekat.'};
+  const score = (r/255)*40 + (1 - g/255)*30 + (1 - b/255)*20 + ((7.5-ph)/2)*10;
+  const pct = Math.min(85, Math.max(20, score));
+  return {label:'Dehidrasi Ringan', color:'var(--amber)', pct: Math.round(pct), desc:'pH '+ph.toFixed(1)+' dalam rentang normal namun menunjukkan tanda dehidrasi ringan. Nilai R='+r+', G='+g+', B='+b+'. Disarankan minum 1–2 gelas air segera.'};
+}
+
+function updateChecker() {
+  const ph = parseFloat(document.getElementById('phSlider').value);
+  const r = parseInt(document.getElementById('rSlider').value);
+  const g = parseInt(document.getElementById('gSlider').value);
+  const b = parseInt(document.getElementById('bSlider').value);
+
+  document.getElementById('phVal').textContent = ph.toFixed(1);
+  document.getElementById('rVal').textContent = r;
+  document.getElementById('gVal').textContent = g;
+  document.getElementById('bVal').textContent = b;
+
+  const result = getStatus(ph, r, g, b);
+  document.getElementById('resultStatus').textContent = result.label;
+  document.getElementById('resultStatus').style.color = result.color;
+  document.getElementById('resultDesc').textContent = result.desc;
+
+  const fill = document.getElementById('meterFill');
+  fill.style.width = result.pct + '%';
+  fill.style.background = result.color;
+
+  document.getElementById('rgbPreview').style.background = `rgb(${r},${g},${b})`;
+  const lum = 0.299*r + 0.587*g + 0.114*b;
+  document.getElementById('rgbPreview').style.color = lum > 128 ? '#111' : '#eee';
+  document.getElementById('rgbPreview').textContent = `RGB(${r}, ${g}, ${b})`;
+
+  const phPct = ((ph - 4) / (9 - 4)) * 100;
+  document.getElementById('phBar').style.width = phPct.toFixed(1) + '%';
+  document.getElementById('phBarLabel').textContent = ph.toFixed(1);
+}
+
+['phSlider','rSlider','gSlider','bSlider'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateChecker);
+});
+
+updateChecker();
+</script>
+</body>
+</html>
