@@ -133,6 +133,10 @@
       color: var(--cyan)
     }
 
+    .nav-toggle {
+      display: none;
+    }
+
     /* LAYOUT */
     main {
       position: relative;
@@ -491,6 +495,7 @@
 
     input[type=range] {
       -webkit-appearance: none;
+      appearance: none;
       flex: 1;
       height: 3px;
       background: var(--surface3);
@@ -975,6 +980,218 @@
       animation-delay: .4s;
       opacity: 0
     }
+
+    /* RESPONSIVE DESIGN */
+    
+    /* Mobile (<768px) */
+    @media (max-width: 767px) {
+      nav {
+        padding: 0 1rem;
+        height: auto;
+        min-height: 58px;
+        flex-wrap: wrap;
+      }
+      
+      .nav-brand {
+        font-size: 1rem;
+        order: 1;
+        flex: 1;
+      }
+      
+      .nav-toggle {
+        display: block;
+        order: 2;
+        background: none;
+        border: none;
+        color: var(--cyan);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        order: 3;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 0;
+        border-top: 1px solid var(--border);
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .nav-links a {
+        padding: 0.5rem 0;
+        font-size: 12px;
+      }
+      
+      main {
+        padding: 0 1rem 3rem;
+      }
+      
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+      
+      .hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        line-height: 1.2;
+      }
+      
+      .hero p {
+        font-size: 13px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        max-width: 100%;
+      }
+      
+      .stat-box {
+        padding: 0.8rem;
+      }
+      
+      .stat-val {
+        font-size: 1.3rem;
+      }
+      
+      .condition-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .cond-card {
+        padding: 1.2rem;
+      }
+      
+      .checker-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .result-panel {
+        position: static;
+        margin-top: 1.5rem;
+      }
+      
+      .color-indicator-wrap {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .color-detail {
+        position: static;
+      }
+      
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .how-cell {
+        padding: 1.2rem;
+      }
+      
+      .how-num {
+        font-size: 2rem;
+      }
+      
+      .detail-body {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .detail-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .risk-name {
+        width: 100px;
+        font-size: 9px;
+      }
+      
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .footer-meta {
+        text-align: center;
+      }
+      
+      /* pH reference table mobile */
+      div[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    
+    /* Tablet (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+      
+      main {
+        padding: 0 1.5rem 4rem;
+      }
+      
+      .hero {
+        padding: 4rem 0 3rem;
+      }
+      
+      .hero-stats {
+        max-width: 100%;
+      }
+      
+      .condition-grid {
+        gap: 1.2rem;
+      }
+      
+      .cond-card {
+        padding: 1.3rem;
+      }
+      
+      .checker-grid {
+        gap: 1.5rem;
+      }
+      
+      .color-indicator-wrap {
+        gap: 1.5rem;
+      }
+      
+      .how-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .detail-body {
+        grid-template-columns: 1fr;
+      }
+      
+      footer {
+        padding: 1.5rem;
+      }
+      
+      /* pH reference table tablet */
+      div[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    
+    /* Large Desktop (>1200px) */
+    @media (min-width: 1200px) {
+      main {
+        max-width: 1200px;
+      }
+      
+      .hero-stats {
+        max-width: 680px;
+      }
+    }
   </style>
 </head>
 
@@ -985,7 +1202,10 @@
       <div class="nav-pulse"></div>
       URIN<span style="color:var(--text2)">SCAN</span>
     </div>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+      ☰
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#kondisi">Kondisi</a></li>
       <li><a href="#checker">Cek pH</a></li>
       <li><a href="#warna">Warna</a></li>
@@ -1657,6 +1877,37 @@
   `;
       tbody.appendChild(tr);
     });
+
+    // ===== MOBILE MENU TOGGLE =====
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isOpen);
+        navToggle.textContent = isOpen ? '✕' : '☰';
+      });
+      
+      // Close menu when clicking on a link
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.textContent = '☰';
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target)) {
+          navLinks.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.textContent = '☰';
+        }
+      });
+    }
   </script>
 </body>
 
