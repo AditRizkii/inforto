@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inforto — Deteksi Kesehatan Melalui Analisis Urin</title>
+  <title>Inforto — Health Detection Through Urine Analysis</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap"
     rel="stylesheet">
@@ -982,7 +982,7 @@
     }
 
     /* RESPONSIVE DESIGN */
-    
+
     /* Mobile (<768px) */
     @media (max-width: 767px) {
       nav {
@@ -991,13 +991,13 @@
         min-height: 58px;
         flex-wrap: wrap;
       }
-      
+
       .nav-brand {
         font-size: 1rem;
         order: 1;
         flex: 1;
       }
-      
+
       .nav-toggle {
         display: block;
         order: 2;
@@ -1008,7 +1008,7 @@
         cursor: pointer;
         padding: 0.5rem;
       }
-      
+
       .nav-links {
         display: none;
         width: 100%;
@@ -1018,176 +1018,176 @@
         padding: 1rem 0;
         border-top: 1px solid var(--border);
       }
-      
+
       .nav-links.active {
         display: flex;
       }
-      
+
       .nav-links a {
         padding: 0.5rem 0;
         font-size: 12px;
       }
-      
+
       main {
         padding: 0 1rem 3rem;
       }
-      
+
       .hero {
         padding: 3rem 0 2rem;
       }
-      
+
       .hero h1 {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
         line-height: 1.2;
       }
-      
+
       .hero p {
         font-size: 13px;
         margin-bottom: 1.5rem;
       }
-      
+
       .hero-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 1px;
         max-width: 100%;
       }
-      
+
       .stat-box {
         padding: 0.8rem;
       }
-      
+
       .stat-val {
         font-size: 1.3rem;
       }
-      
+
       .condition-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
       }
-      
+
       .cond-card {
         padding: 1.2rem;
       }
-      
+
       .checker-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      
+
       .result-panel {
         position: static;
         margin-top: 1.5rem;
       }
-      
+
       .color-indicator-wrap {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      
+
       .color-detail {
         position: static;
       }
-      
+
       .how-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .how-cell {
         padding: 1.2rem;
       }
-      
+
       .how-num {
         font-size: 2rem;
       }
-      
+
       .detail-body {
         grid-template-columns: 1fr;
         gap: 1rem;
       }
-      
+
       .detail-meta {
         grid-template-columns: 1fr 1fr;
       }
-      
+
       .risk-name {
         width: 100px;
         font-size: 9px;
       }
-      
+
       footer {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
       }
-      
+
       .footer-meta {
         text-align: center;
       }
-      
+
       /* pH reference table mobile */
       div[style*="grid-template-columns:repeat(4,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
       }
     }
-    
+
     /* Tablet (768px - 1024px) */
     @media (min-width: 768px) and (max-width: 1023px) {
       nav {
         padding: 0 1.5rem;
       }
-      
+
       main {
         padding: 0 1.5rem 4rem;
       }
-      
+
       .hero {
         padding: 4rem 0 3rem;
       }
-      
+
       .hero-stats {
         max-width: 100%;
       }
-      
+
       .condition-grid {
         gap: 1.2rem;
       }
-      
+
       .cond-card {
         padding: 1.3rem;
       }
-      
+
       .checker-grid {
         gap: 1.5rem;
       }
-      
+
       .color-indicator-wrap {
         gap: 1.5rem;
       }
-      
+
       .how-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .detail-body {
         grid-template-columns: 1fr;
       }
-      
+
       footer {
         padding: 1.5rem;
       }
-      
+
       /* pH reference table tablet */
       div[style*="grid-template-columns:repeat(4,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
       }
     }
-    
+
     /* Large Desktop (>1200px) */
     @media (min-width: 1200px) {
       main {
         max-width: 1200px;
       }
-      
+
       .hero-stats {
         max-width: 680px;
       }
@@ -1200,17 +1200,17 @@
   <nav>
     <div class="nav-brand">
       <div class="nav-pulse"></div>
-      URIN<span style="color:var(--text2)">SCAN</span>
+      INFO<span style="color:var(--text2)">RTO</span>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
       ☰
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#kondisi">Kondisi</a></li>
-      <li><a href="#checker">Cek pH</a></li>
-      <li><a href="#warna">Warna</a></li>
+      <li><a href="#conditions">Conditions</a></li>
+      <li><a href="#checker">pH Check</a></li>
+      <li><a href="#color">Color</a></li>
       <li><a href="#data">Data</a></li>
-      <li><a href="#cara-kerja">Cara Kerja</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
     </ul>
   </nav>
 
@@ -1218,39 +1218,39 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-tag fa">⬡ Berbasis Sensor pH H-101 &amp; TCS3200 — ELECTRICES 2020</div>
-      <h1 class="fa d1">Urin Sebagai<br><em>Jendela Kesehatan</em><br>Tubuh Anda</h1>
-      <p class="fa d2">pH dan warna urin bukan sekadar indikator minum atau tidak minum. Keduanya membawa informasi
-        penting tentang kondisi ginjal, hati, metabolisme, dan infeksi yang mungkin terjadi di dalam tubuh — bahkan
-        sebelum gejala lain muncul.</p>
+      <div class="hero-tag fa">⬡ Based on pH H-101 &amp; TCS3200 Sensors — ELECTRICES 2020</div>
+      <h1 class="fa d1">Urine as a<br><em>Window Into</em><br>Your Health</h1>
+      <p class="fa d2">Urine pH and color carry far more information than just hydration status. They provide early
+        signals about kidney function, liver health, metabolic disorders, and infections — often before other symptoms
+        even appear.</p>
       <div class="hero-stats fa d3">
         <div class="stat-box">
           <div class="stat-val">4.5</div>
-          <div class="stat-lbl">pH Min Normal</div>
+          <div class="stat-lbl">Min Normal pH</div>
         </div>
         <div class="stat-box">
           <div class="stat-val">7.8</div>
-          <div class="stat-lbl">pH Max Normal</div>
+          <div class="stat-lbl">Max Normal pH</div>
         </div>
         <div class="stat-box">
           <div class="stat-val">5+</div>
-          <div class="stat-lbl">Kondisi Terdeteksi</div>
+          <div class="stat-lbl">Conditions Detected</div>
         </div>
         <div class="stat-box">
           <div class="stat-val">&lt;30s</div>
-          <div class="stat-lbl">Waktu Analisis</div>
+          <div class="stat-lbl">Analysis Time</div>
         </div>
       </div>
     </section>
 
     <!-- SECTION 1: KONDISI KESEHATAN -->
-    <section id="kondisi">
+    <section id="conditions">
       <div class="sec-header">
         <span class="sec-num">01</span>
-        <h2 class="sec-title">Kondisi Kesehatan yang Terdeteksi</h2>
+        <h2 class="sec-title">Health Conditions Detectable via Urine</h2>
       </div>
-      <p class="sec-sub">Berikut kondisi-kondisi yang dapat diindikasikan melalui perubahan pH dan warna urin. Klik
-        kartu untuk membaca penjelasan lengkap.</p>
+      <p class="sec-sub">These are the conditions that can be indicated by changes in urine pH and color. Click any card
+        to read the full clinical explanation.</p>
 
       <div class="condition-grid" id="condGrid"></div>
       <div class="cond-detail" id="condDetail"></div>
@@ -1260,16 +1260,16 @@
     <section id="checker">
       <div class="sec-header">
         <span class="sec-num">02</span>
-        <h2 class="sec-title">Cek Kondisi dari Nilai pH</h2>
+        <h2 class="sec-title">Check Your pH — Health Estimator</h2>
       </div>
-      <p class="sec-sub">Masukkan nilai pH urin dan warna untuk melihat kemungkinan kondisi kesehatan yang berisiko.
-        Bukan pengganti diagnosis dokter — gunakan sebagai referensi awal.</p>
+      <p class="sec-sub">Enter your urine pH value and RGB color readings to estimate potential health conditions. This
+        is not a substitute for medical diagnosis — use it as an informed starting point.</p>
 
       <div class="checker-grid">
         <div class="checker-panel">
-          <div class="panel-label">Input nilai pH</div>
+          <div class="panel-label">pH Input</div>
           <div class="input-group">
-            <label>Nilai pH Urin</label>
+            <label>Urine pH Value</label>
             <div class="slider-row">
               <input type="range" id="phSlider" min="4" max="9" step="0.1" value="6.5">
               <span class="slider-val" id="phVal">6.5</span>
@@ -1277,10 +1277,10 @@
             <div class="ph-scale-bar">
               <div class="ph-cursor" id="phCursor"></div>
             </div>
-            <div class="ph-labels"><span>4 (Asam)</span><span>6</span><span>7</span><span>9 (Basa)</span></div>
+            <div class="ph-labels"><span>4 (Acidic)</span><span>6</span><span>7</span><span>9 (Alkaline)</span></div>
           </div>
 
-          <div class="panel-label" style="margin-top:1.2rem">Warna urin (RGB)</div>
+          <div class="panel-label" style="margin-top:1.2rem">Urine Color (RGB)</div>
           <div class="input-group">
             <label>Red (R)</label>
             <div class="slider-row">
@@ -1302,17 +1302,18 @@
               <span class="slider-val" id="bVal" style="color:#38bdf8">30</span>
             </div>
           </div>
-          <div class="color-input-preview" id="colorPreview">Preview Warna Urin</div>
+          <div class="color-input-preview" id="colorPreview">Urine Color Preview</div>
         </div>
 
         <div class="result-panel">
-          <div class="result-status-label">Estimasi Kondisi</div>
+          <div class="result-status-label">Estimated Condition</div>
           <div class="result-title" id="resTitle">—</div>
           <div class="result-condition" id="resCondition"></div>
           <div class="risk-bars" id="riskBars"></div>
           <div class="result-advice" id="resAdvice"></div>
           <div class="result-disclaimer">
-            ⚠ Ini adalah estimasi berbasis literatur, bukan diagnosis medis. Konsultasikan ke dokter untuk konfirmasi.
+            ⚠ This is a literature-based estimate only, not a medical diagnosis. Please consult a healthcare
+            professional for confirmation.
           </div>
         </div>
       </div>
@@ -1322,16 +1323,16 @@
     <section id="warna">
       <div class="sec-header">
         <span class="sec-num">03</span>
-        <h2 class="sec-title">Indikator Warna Urin</h2>
+        <h2 class="sec-title">Urine Color Indicator</h2>
       </div>
-      <p class="sec-sub">Warna urin berubah sesuai kondisi tubuh. Sensor TCS3200 dalam penelitian ini mengklasifikasikan
-        warna ke nilai RGB. Klik tiap warna untuk membaca interpretasi klinisnya.</p>
+      <p class="sec-sub">Urine color shifts in response to bodily conditions. The TCS3200 sensor in this research
+        classifies color into RGB values. Click each row to read its clinical interpretation.</p>
 
       <div class="color-indicator-wrap">
         <div>
           <div
             style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:.8rem">
-            // data 12 sampel penelitian</div>
+            // 12 research sample readings</div>
           <div class="color-strip" id="colorStrip"></div>
         </div>
         <div class="color-detail">
@@ -1346,10 +1347,10 @@
     <section id="data">
       <div class="sec-header">
         <span class="sec-num">04</span>
-        <h2 class="sec-title">Data Pengukuran Penelitian</h2>
+        <h2 class="sec-title">Research Measurement Data</h2>
       </div>
-      <p class="sec-sub">Hasil pengukuran 12 sampel urin menggunakan sensor pH H-101 dan TCS3200, dengan validasi
-        terhadap pH meter standar. Tingkat error maksimum 0.1 digit.</p>
+      <p class="sec-sub">Measurement results from 12 urine samples using the pH H-101 and TCS3200 sensors, validated
+        against a standard pH meter. Maximum error: 0.1 digit.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -1358,11 +1359,11 @@
               <th>pH Sensor</th>
               <th>pH Meter</th>
               <th>Error (%)</th>
-              <th>Warna (RGB)</th>
+              <th>Color (RGB)</th>
               <th>R</th>
               <th>G</th>
               <th>B</th>
-              <th>Status Hidrasi</th>
+              <th>Hydration Status</th>
             </tr>
           </thead>
           <tbody id="dataBody"></tbody>
@@ -1370,7 +1371,7 @@
       </div>
       <div style="margin-top:.8rem;font-size:11px;color:var(--text3);display:flex;align-items:center;gap:8px">
         <span
-          style="background:var(--cyan-dim);border:1px solid var(--border2);padding:2px 8px;color:var(--cyan);font-size:10px;letter-spacing:.1em">SUMBER</span>
+          style="background:var(--cyan-dim);border:1px solid var(--border2);padding:2px 8px;color:var(--cyan);font-size:10px;letter-spacing:.1em">SOURCE</span>
         Rohman K, et al. — ELECTRICES Vol. 2 No. 2, 2020. Politeknik Negeri Jakarta.
       </div>
     </section>
@@ -1379,57 +1380,57 @@
     <section id="cara-kerja">
       <div class="sec-header">
         <span class="sec-num">05</span>
-        <h2 class="sec-title">Cara Kerja Sistem Deteksi</h2>
+        <h2 class="sec-title">How the Detection System Works</h2>
       </div>
-      <p class="sec-sub">Urinoir cerdas ini menggabungkan dua sensor untuk mendeteksi kondisi kesehatan dari sampel urin
-        secara otomatis, tanpa perlu tes darah atau klinik.</p>
+      <p class="sec-sub">This smart urinal combines two sensors to automatically detect health conditions from urine
+        samples — no blood tests or clinic visits required.</p>
       <div class="how-grid">
         <div class="how-cell">
           <div class="how-accent" style="background:var(--cyan)"></div>
           <div class="how-icon">🚶</div>
-          <div class="how-title">Deteksi Kehadiran</div>
-          <div class="how-desc">Sensor infrared mendeteksi pengguna. Control valve menutup saluran sehingga urin
-            tertampung untuk dianalisis (kapasitas 100ml).</div>
+          <div class="how-title">User Detection</div>
+          <div class="how-desc">An infrared sensor detects the user. The control valve closes to retain urine for
+            analysis (100ml capacity).</div>
           <div class="how-num">1</div>
         </div>
         <div class="how-cell">
           <div class="how-accent" style="background:var(--purple)"></div>
           <div class="how-icon">⚗️</div>
-          <div class="how-title">Sensor pH H-101</div>
-          <div class="how-desc">Mengukur keasaman urin secara akurat. pH yang rendah (asam) atau tinggi (basa)
-            mengindikasikan gangguan metabolisme, ginjal, atau infeksi.</div>
+          <div class="how-title">pH H-101 Sensor</div>
+          <div class="how-desc">Accurately measures urine acidity. A very low (acidic) or high (alkaline) pH can
+            indicate metabolic disorders, kidney disease, or infection.</div>
           <div class="how-num">2</div>
         </div>
         <div class="how-cell">
           <div class="how-accent" style="background:var(--amber)"></div>
           <div class="how-icon">🎨</div>
-          <div class="how-title">Sensor Warna TCS3200</div>
-          <div class="how-desc">Membaca nilai RGB urin. Warna coklat gelap, oranye, keruh, atau merah masing-masing
-            menandakan kondisi yang berbeda pada organ tubuh.</div>
+          <div class="how-title">TCS3200 Color Sensor</div>
+          <div class="how-desc">Reads the RGB color values of urine. Dark brown, orange, cloudy, or red hues each point
+            to different conditions in specific organs.</div>
           <div class="how-num">3</div>
         </div>
         <div class="how-cell">
           <div class="how-accent" style="background:var(--green)"></div>
           <div class="how-icon">🧠</div>
-          <div class="how-title">Pemrosesan Arduino</div>
-          <div class="how-desc">Arduino Nano memproses nilai pH + RGB secara bersamaan. pH digunakan untuk mengoreksi
-            kesalahan baca warna akibat pengaruh makanan.</div>
+          <div class="how-title">Arduino Processing</div>
+          <div class="how-desc">The Arduino Nano processes pH and RGB data simultaneously. pH corrects any color reading
+            errors caused by food dyes or medications.</div>
           <div class="how-num">4</div>
         </div>
         <div class="how-cell">
           <div class="how-accent" style="background:var(--red)"></div>
           <div class="how-icon">🖥️</div>
-          <div class="how-title">Tampilan Hasil</div>
-          <div class="how-desc">Status ditampilkan di layar LCD dalam kurang dari 30 detik. Hasilnya dapat dijadikan
-            dasar untuk konsultasi ke tenaga medis lebih lanjut.</div>
+          <div class="how-title">Result Display</div>
+          <div class="how-desc">Status is shown on an LCD screen in under 30 seconds. Results can be used as the basis
+            for a conversation with a healthcare provider.</div>
           <div class="how-num">5</div>
         </div>
         <div class="how-cell">
           <div class="how-accent" style="background:var(--cyan)"></div>
           <div class="how-icon">💧</div>
-          <div class="how-title">Bilas Otomatis</div>
-          <div class="how-desc">Setelah pengguna pergi, valve terbuka dan pompa membilas urinoir selama 8 detik, menjaga
-            kebersihan untuk pengguna berikutnya.</div>
+          <div class="how-title">Auto-Flush</div>
+          <div class="how-desc">After the user leaves, the valve opens and the pump flushes the urinal for 8 seconds,
+            keeping it clean for the next user.</div>
           <div class="how-num">6</div>
         </div>
       </div>
@@ -1437,39 +1438,38 @@
       <!-- PH REFERENCE TABLE -->
       <div style="margin-top:2rem;background:var(--surface);border:1px solid var(--border);padding:1.6rem">
         <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem">
-          // tabel referensi pH urin &amp; kondisi terkait</div>
+          // urine pH reference table &amp; associated conditions</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)">
           <div style="background:var(--red-dim);padding:1rem;border:1px solid rgba(248,113,113,.12);text-align:center">
             <div style="font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--red)">pH &lt; 5.5</div>
             <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:4px 0">
-              Sangat Asam</div>
-            <div style="font-size:11px;color:var(--text2)">Diabetes Ketoasidosis, Gagal Ginjal, Diare Berat</div>
+              Very Acidic</div>
+            <div style="font-size:11px;color:var(--text2)">Diabetic Ketoacidosis, Kidney Failure, Severe Diarrhea</div>
           </div>
           <div style="background:var(--amber-dim);padding:1rem;border:1px solid rgba(251,191,36,.12);text-align:center">
             <div style="font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--amber)">5.5 – 6.5</div>
             <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:4px 0">
-              Asam Ringan</div>
-            <div style="font-size:11px;color:var(--text2)">Resistensi Insulin, Sindrom Metabolik, Beban Asam Tinggi
-            </div>
+              Mildly Acidic</div>
+            <div style="font-size:11px;color:var(--text2)">Insulin Resistance, Metabolic Syndrome, High Acid Load</div>
           </div>
           <div style="background:var(--green-dim);padding:1rem;border:1px solid rgba(74,222,128,.12);text-align:center">
             <div style="font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--green)">6.5 – 7.5</div>
             <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:4px 0">
               Normal</div>
-            <div style="font-size:11px;color:var(--text2)">Fungsi ginjal baik, keseimbangan asam-basa optimal</div>
+            <div style="font-size:11px;color:var(--text2)">Good kidney function, optimal acid-base balance</div>
           </div>
           <div
             style="background:var(--purple-dim);padding:1rem;border:1px solid rgba(192,132,252,.12);text-align:center">
             <div style="font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--purple)">pH &gt; 7.5
             </div>
             <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:4px 0">
-              Basa</div>
-            <div style="font-size:11px;color:var(--text2)">Infeksi Saluran Kemih (ISK), Asidosis Tubular Ginjal, Muntah
-              Kronis</div>
+              Alkaline</div>
+            <div style="font-size:11px;color:var(--text2)">Urinary Tract Infection (UTI), Renal Tubular Acidosis,
+              Chronic Vomiting</div>
           </div>
         </div>
         <div style="font-size:10px;color:var(--text3);margin-top:.7rem">
-          Referensi: Verdiansyah (2016), American Assoc. for Clinical Chemistry, Cleveland Clinic (2025), National
+          References: Verdiansyah (2016), American Assoc. for Clinical Chemistry, Cleveland Clinic (2025), National
           Kidney Foundation
         </div>
       </div>
@@ -1479,199 +1479,198 @@
 
   <footer>
     <div>
-      <div class="footer-brand">URINSCAN</div>
-      <div style="font-size:10px;color:var(--text3);margin-top:3px">Deteksi Kondisi Kesehatan Melalui Analisis pH &amp;
-        Warna Urin</div>
+      <div class="footer-brand">INFORTO</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:3px">Health Detection Through Urine pH &amp; Color
+        Analysis</div>
     </div>
     <div class="footer-meta">
-      Berdasarkan penelitian Rohman K, Pratama MV, Sutarna N, et al.<br>
+      Based on research by Rohman K, Pratama MV, Sutarna N, et al.<br>
       ELECTRICES Vol. 2 No. 2, 2020 — Politeknik Negeri Jakarta
     </div>
   </footer>
 
   <script>
-    // ===== DATA =====
     const conditions = [
       {
-        icon: '🫘', name: 'Gangguan Ginjal', accentColor: 'var(--cyan)',
-        badgeLabel: 'Ginjal', badgeStyle: 'background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(56,189,248,.2)',
-        phRange: 'pH tinggi (>7.5) atau sangat rendah (<5.5)',
+        icon: '🫘', name: 'Kidney Disorders', accentColor: 'var(--cyan)',
+        badgeLabel: 'Kidney', badgeStyle: 'background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(56,189,248,.2)',
+        phRange: 'High pH (>7.5) or very low pH (<5.5)',
         phColor: 'var(--cyan)',
-        desc: 'Ginjal adalah organ utama pengatur pH darah dan urin. Gangguan fungsi ginjal langsung memengaruhi keasaman urin secara signifikan.',
-        tags: ['Penyakit Ginjal Kronis (CKD)', 'Batu Ginjal', 'Asidosis Tubular Ginjal', 'Gagal Ginjal'],
+        desc: 'The kidneys are the primary regulators of blood and urine pH. Impaired kidney function directly and significantly affects urine acidity levels.',
+        tags: ['Chronic Kidney Disease (CKD)', 'Kidney Stones', 'Renal Tubular Acidosis', 'Kidney Failure'],
         detail: {
-          what: 'Ginjal menyaring asam dari darah dan mengatur keseimbangan pH tubuh. Ketika fungsinya terganggu, kemampuan membuang asam berkurang sehingga urin menjadi terlalu asam atau terlalu basa secara abnormal.',
+          what: 'The kidneys filter acid from the blood and regulate the body\'s overall pH balance. When function is impaired, the ability to excrete acid decreases — causing urine to become abnormally acidic or alkaline.',
           signs: [
-            'Urin sangat asam (pH <5.5) — penumpukan asam akibat ginjal tidak mampu menyaring',
-            'Urin basa (pH >7.5) — Asidosis Tubular Ginjal, ginjal gagal menyerap kembali bikarbonat',
-            'Warna urin coklat teh atau merah — tanda kerusakan jaringan ginjal',
-            'Urin berbusa — kelebihan protein (proteinuria) tanda disfungsi ginjal',
-            'pH tinggi disertai infeksi meningkatkan risiko batu struvite'
+            'Very acidic urine (pH <5.5) — acid buildup due to impaired filtration',
+            'Alkaline urine (pH >7.5) — Renal Tubular Acidosis; kidneys fail to reabsorb bicarbonate',
+            'Tea-colored or red urine — sign of kidney tissue damage',
+            'Foamy urine — excess protein (proteinuria), a hallmark of kidney dysfunction',
+            'High pH combined with infection raises risk of struvite kidney stones'
           ],
-          warning: 'Urin berwarna merah/pink tanpa konsumsi bit atau obat-obatan tertentu harus segera diperiksa ke dokter — kemungkinan hematuria (darah dalam urin).'
+          warning: 'Red or pink urine not explained by beet or medication consumption should be evaluated immediately by a doctor — it may indicate hematuria (blood in urine).'
         }
       },
       {
         icon: '🍬', name: 'Diabetes Mellitus', accentColor: 'var(--amber)',
-        badgeLabel: 'Metabolik', badgeStyle: 'background:var(--amber-dim);color:var(--amber);border:1px solid rgba(251,191,36,.2)',
-        phRange: 'pH rendah (< 5.5 — 6.0)',
+        badgeLabel: 'Metabolic', badgeStyle: 'background:var(--amber-dim);color:var(--amber);border:1px solid rgba(251,191,36,.2)',
+        phRange: 'Low pH (< 5.5 – 6.0)',
         phColor: 'var(--amber)',
-        desc: 'pH urin yang rendah berkorelasi kuat dengan resistensi insulin dan diabetes tipe 2, bahkan bisa muncul sebelum diagnosis resmi.',
-        tags: ['Diabetes Tipe 2', 'Ketoasidosis Diabetik', 'Resistensi Insulin', 'Sindrom Metabolik'],
+        desc: 'Low urine pH strongly correlates with insulin resistance and type 2 diabetes — and may appear before a formal clinical diagnosis is made.',
+        tags: ['Type 2 Diabetes', 'Diabetic Ketoacidosis', 'Insulin Resistance', 'Metabolic Syndrome'],
         detail: {
-          what: 'Penelitian populasi besar (Jepang, 5 tahun, 3119 subjek) menunjukkan bahwa urin dengan pH rendah merupakan prediktor independen kejadian diabetes tipe 2. Kondisi asam berhubungan dengan beban asam metabolik akibat resistensi insulin.',
+          what: 'A large population study (Japan, 5 years, 3,119 subjects) found that low urine pH is an independent predictor of incident type 2 diabetes. The acidic environment reflects high metabolic acid load linked to insulin resistance.',
           signs: [
-            'pH urin konsisten di bawah 6.0 — tanda beban asam metabolik tinggi',
-            'Urin berbau manis atau seperti buah — ketonuria pada Ketoasidosis Diabetik (KAD)',
-            'Pada KAD, pH bisa turun di bawah 5.0, kondisi mengancam jiwa',
-            'pH rendah juga berkorelasi dengan obesitas visceral dan IMT tinggi',
-            'Glukosa dalam urin (glikosuria) muncul saat kadar gula darah sangat tinggi'
+            'Consistently low urine pH below 6.0 — high metabolic acid burden',
+            'Sweet or fruity-smelling urine — ketonuria in Diabetic Ketoacidosis (DKA)',
+            'In DKA, pH can drop below 5.0 — a life-threatening emergency',
+            'Low pH also correlates with visceral obesity and high BMI',
+            'Glucose in urine (glycosuria) appears when blood sugar is extremely high'
           ],
-          warning: 'Urin berbau manis + pH sangat asam adalah tanda darurat Ketoasidosis Diabetik. Harus segera mendapat penanganan medis.'
+          warning: 'Sweet-smelling urine combined with very low pH is a warning sign of Diabetic Ketoacidosis. Seek emergency medical attention immediately.'
         }
       },
       {
-        icon: '🦠', name: 'Infeksi Saluran Kemih (ISK)', accentColor: 'var(--red)',
-        badgeLabel: 'Infeksi', badgeStyle: 'background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,.2)',
-        phRange: 'pH tinggi (> 7.0 — 8.0)',
+        icon: '🦠', name: 'Urinary Tract Infection (UTI)', accentColor: 'var(--red)',
+        badgeLabel: 'Infection', badgeStyle: 'background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,.2)',
+        phRange: 'High pH (> 7.0 – 8.0)',
         phColor: 'var(--red)',
-        desc: 'Bakteri penyebab ISK memecah urea menjadi amonia, membuat urin lebih basa. pH tinggi + urin keruh adalah sinyal kuat adanya infeksi.',
-        tags: ['ISK / UTI', 'Infeksi Kandung Kemih', 'Infeksi Ginjal (Pielonefritis)', 'Bakteriuria'],
+        desc: 'UTI-causing bacteria break down urea into ammonia, making urine more alkaline. High pH combined with cloudy urine is a strong signal of active infection.',
+        tags: ['UTI / Bacteriuria', 'Bladder Infection', 'Kidney Infection (Pyelonephritis)', 'Bacterial Infection'],
         detail: {
-          what: 'Bakteri tertentu (seperti Proteus, Klebsiella) yang tumbuh di saluran kemih menghasilkan enzim urease yang memecah urea menjadi amonia. Hasilnya: urin menjadi basa (pH naik) dan berbau tajam.',
+          what: 'Certain bacteria (such as Proteus and Klebsiella) that colonize the urinary tract produce urease — an enzyme that breaks urea into ammonia. The result: urine becomes alkaline (pH rises) and smells sharply of ammonia.',
           signs: [
-            'pH urin > 7.0 disertai bau amonia yang menyengat',
-            'Urin berwarna keruh atau berawan — akumulasi sel darah putih dan bakteri',
-            'Urin pink/merah — darah akibat iritasi dinding saluran kemih',
-            'Nyeri atau panas saat buang air kecil adalah gejala khas yang menyertai',
-            'Warna hijau kadang muncul pada infeksi bakteri tertentu'
+            'Urine pH > 7.0 with strong ammonia odor',
+            'Cloudy or murky urine — accumulation of white blood cells and bacteria',
+            'Pink or red urine — blood from irritation of the urinary tract lining',
+            'Burning or painful urination and frequent urge to urinate',
+            'Greenish urine can occasionally appear with certain bacterial strains'
           ],
-          warning: 'ISK yang tidak diobati bisa naik ke ginjal (pielonefritis) — kondisi lebih serius dengan demam tinggi dan nyeri punggung bawah. Segera ke dokter.'
+          warning: 'An untreated UTI can ascend to the kidneys (pyelonephritis) — a more serious condition with high fever and lower back pain. See a doctor promptly.'
         }
       },
       {
-        icon: '🫀', name: 'Gangguan Hati & Empedu', accentColor: 'var(--amber)',
-        badgeLabel: 'Hati', badgeStyle: 'background:var(--amber-dim);color:var(--amber);border:1px solid rgba(251,191,36,.2)',
-        phRange: 'Bervariasi; warna urin sangat diagnostik',
+        icon: '🫀', name: 'Liver & Bile Duct Disorders', accentColor: 'var(--amber)',
+        badgeLabel: 'Liver', badgeStyle: 'background:var(--amber-dim);color:var(--amber);border:1px solid rgba(251,191,36,.2)',
+        phRange: 'Variable; urine color is highly diagnostic',
         phColor: 'var(--amber)',
-        desc: 'Hati yang terganggu melepaskan bilirubin ke aliran darah. Bilirubin ini lalu masuk ke urin, mengubah warnanya menjadi oranye-coklat gelap.',
-        tags: ['Hepatitis', 'Sirosis Hati', 'Batu Empedu', 'Ikterus (Jaundice)'],
+        desc: 'A damaged liver releases bilirubin into the bloodstream. This bilirubin is then filtered into urine, turning it dark orange or brown — a key visual warning sign.',
+        tags: ['Hepatitis', 'Liver Cirrhosis', 'Gallstones', 'Jaundice (Icterus)'],
         detail: {
-          what: 'Ketika hati tidak bisa memproses bilirubin (sisa pemecahan sel darah merah) dengan baik, bilirubin menumpuk di darah lalu disaring ke urin. Hasilnya adalah warna urin oranye gelap hingga coklat seperti teh.',
+          what: 'When the liver fails to process bilirubin (a byproduct of red blood cell breakdown) properly, bilirubin accumulates in the blood and is excreted through the kidneys into urine — producing the characteristic dark orange to tea-brown color.',
           signs: [
-            'Warna urin oranye pekat atau coklat teh — kandungan bilirubin tinggi',
-            'Disertai feses berwarna pucat (dempul) — empedu tidak mengalir ke usus',
-            'Kulit dan mata menguning (jaundice) biasanya menyertai',
-            'Urin berbau busuk atau seperti daging — tanda gagal hati',
-            'Urin coklat gelap + nyeri perut kanan atas — indikasi kuat masalah hati'
+            'Dark orange or tea-brown urine — high bilirubin content',
+            'Pale or clay-colored stools alongside dark urine — bile not reaching the intestine',
+            'Yellowing of skin and eyes (jaundice) frequently accompanies these changes',
+            'Putrid or meat-like urine odor — sign of liver failure',
+            'Dark brown urine + upper right abdominal pain — strong indicator of liver disease'
           ],
-          warning: 'Urin oranye-coklat + mata menguning adalah tanda serius gangguan hati. Jangan tunda pemeriksaan — kondisi seperti hepatitis akut memerlukan penanganan segera.'
+          warning: 'Orange-brown urine with yellowing eyes is a serious sign of liver disease. Do not delay evaluation — conditions like acute hepatitis require immediate medical care.'
         }
       },
       {
-        icon: '🧬', name: 'Gangguan Metabolik Lainnya', accentColor: 'var(--purple)',
-        badgeLabel: 'Metabolik', badgeStyle: 'background:var(--purple-dim);color:var(--purple);border:1px solid rgba(192,132,252,.2)',
-        phRange: 'pH sangat rendah atau sangat tinggi',
+        icon: '🧬', name: 'Other Metabolic Disorders', accentColor: 'var(--purple)',
+        badgeLabel: 'Metabolic', badgeStyle: 'background:var(--purple-dim);color:var(--purple);border:1px solid rgba(192,132,252,.2)',
+        phRange: 'Very low or very high pH',
         phColor: 'var(--purple)',
-        desc: 'Beberapa gangguan metabolik mengubah keseimbangan asam-basa tubuh secara menyeluruh, dan urin adalah cerminan pertama perubahan tersebut.',
-        tags: ['Asidosis Metabolik', 'Alkalosis', 'Porferia', 'Rhabdomiolisis'],
+        desc: 'Several metabolic conditions disrupt the body\'s entire acid-base equilibrium. Urine is often the first mirror of these systemic changes.',
+        tags: ['Metabolic Acidosis', 'Metabolic Alkalosis', 'Porphyria', 'Rhabdomyolysis'],
         detail: {
-          what: 'Kondisi seperti asidosis metabolik (pH darah rendah) atau alkalosis (pH darah tinggi akibat muntah kronis) langsung tecermin dalam pH urin. Gangguan enzim langka seperti porferia menghasilkan pigmen abnormal dalam urin.',
+          what: 'Conditions like metabolic acidosis (low blood pH) or alkalosis (high blood pH from chronic vomiting) reflect directly in urine pH. Rare enzyme disorders like porphyria produce abnormal pigments that dramatically alter urine color.',
           signs: [
-            'pH urin konsisten <5.0 pada asidosis metabolik berat',
-            'pH urin >8.0 pada alkalosis akibat muntah kronis atau penggunaan antasida berlebihan',
-            'Urin coklat kemerahan atau seperti cola — tanda rhabdomiolisis (kerusakan otot masif)',
-            'Urin berwarna ungu atau merah anggur — porferia, penyakit langka genetik',
-            'Urin berbau musty/apek — gangguan metabolisme asam amino tertentu'
+            'Urine pH consistently below 5.0 in severe metabolic acidosis',
+            'Urine pH above 8.0 in alkalosis from chronic vomiting or antacid overuse',
+            'Reddish-brown or cola-colored urine — sign of rhabdomyolysis (massive muscle breakdown)',
+            'Purple or wine-red urine — porphyria, a rare genetic disorder',
+            'Musty or unusual-smelling urine — certain amino acid metabolism disorders'
           ],
-          warning: 'Urin berwarna coklat setelah olahraga ekstrem atau cedera berat adalah tanda rhabdomiolisis — kondisi yang dapat menyebabkan gagal ginjal akut. Segera minum banyak air dan ke IGD.'
+          warning: 'Cola-colored urine after extreme exercise or traumatic injury is a warning sign of rhabdomyolysis — which can lead to acute kidney failure. Hydrate immediately and seek emergency care.'
         }
       },
       {
-        icon: '🧪', name: 'Faktor Non-Patologis', accentColor: 'var(--green)',
+        icon: '🧪', name: 'Non-Pathological Factors', accentColor: 'var(--green)',
         badgeLabel: 'Normal', badgeStyle: 'background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,.2)',
-        phRange: 'Bervariasi — tidak selalu indikasi penyakit',
+        phRange: 'Variable — not always a sign of disease',
         phColor: 'var(--green)',
-        desc: 'Tidak semua perubahan warna atau pH urin menandakan penyakit. Makanan, obat-obatan, dan vitamin tertentu juga berpengaruh signifikan.',
-        tags: ['Bit / Blackberry', 'Suplemen Vitamin B & C', 'Antibiotik Rifampisin', 'Obat ISK (Phenazopyridine)'],
+        desc: 'Not every change in urine color or pH indicates disease. Certain foods, medications, and vitamins can also significantly alter the appearance of urine.',
+        tags: ['Beets / Blackberries', 'Vitamins B & C', 'Rifampin Antibiotic', 'UTI Medication (Phenazopyridine)'],
         detail: {
-          what: 'Ini adalah alasan mengapa penelitian ini menambahkan sensor pH di samping sensor warna — karena warna urin saja bisa menyesatkan. Makanan seperti bit, blackberry, dan wortel; serta obat-obatan tertentu, dapat mengubah warna urin tanpa ada masalah kesehatan.',
+          what: 'This is precisely why this research added a pH sensor alongside the color sensor — because urine color alone can be misleading. Foods like beets, blackberries, and carrots, as well as certain medications, can change urine color without any underlying health problem.',
           signs: [
-            'Urin merah/pink setelah makan bit, blackberry, atau rhubarb — normal',
-            'Urin oranye cerah — suplemen vitamin B12 atau C dosis tinggi',
-            'Urin oranye gelap — antibiotik rifampisin untuk TBC',
-            'Urin hijau-biru — beberapa obat antidepresan atau pewarna makanan',
-            'Urin sangat pucat — minum air terlalu banyak (overhydration)'
+            'Red/pink urine after eating beets, blackberries, or rhubarb — entirely normal',
+            'Bright orange urine — high-dose vitamin B12 or vitamin C supplements',
+            'Dark orange urine — rifampin antibiotic (commonly used for tuberculosis)',
+            'Blue-green urine — some antidepressants or food dyes',
+            'Very pale, almost clear urine — overhydration (drinking too much water)'
           ],
-          warning: 'Inilah mengapa sensor pH H-101 digunakan bersama TCS3200 — untuk mengoreksi bacaan warna yang mungkin terpengaruh zat warna makanan. pH tidak terpengaruh oleh warna makanan.'
+          warning: 'This is why the pH H-101 sensor is used alongside the TCS3200 — to correct color readings that may be skewed by food dyes. pH is not affected by food coloring, making it the more reliable indicator.'
         }
       }
     ];
 
     const colorData = [
       {
-        label: 'Kuning Pekat (Sampel A)', swatch: 'rgb(207,79,0)', ph: 5.3, r: 207, g: 79, b: 0, status: 'Dehidrasi Berat',
-        hints: ['pH <5.5 — indikasi beban asam metabolik tinggi', 'Warna oranye-coklat, B=0 — urin sangat pekat', 'Risiko: gangguan metabolik atau ginjal, perlu pemeriksaan']
+        label: 'Dark Yellow (Sample A)', swatch: 'rgb(207,79,0)', ph: 5.3, r: 207, g: 79, b: 0, status: 'Severe Dehydration',
+        hints: ['pH <5.5 — indicates high metabolic acid load', 'Orange-brown color, B=0 — very concentrated urine', 'Risk: metabolic or kidney disorder — further testing recommended']
       },
       {
-        label: 'Oranye Amber (B)', swatch: 'rgb(231,99,0)', ph: 6.0, r: 231, g: 99, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['R sangat dominan — urin pekat', 'pH 6.0, batas bawah normal', 'Warna dapat dipengaruhi makanan — pH lebih akurat']
+        label: 'Amber Orange (B)', swatch: 'rgb(231,99,0)', ph: 6.0, r: 231, g: 99, b: 0, status: 'Mild Dehydration',
+        hints: ['Dominant R channel — concentrated urine', 'pH 6.0, lower boundary of normal range', 'Color may be affected by food — pH is the more reliable indicator']
       },
       {
-        label: 'Oranye Gelap (C)', swatch: 'rgb(207,59,0)', ph: 5.5, r: 207, g: 59, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['G sangat rendah (59) — sedikit komponen hijau', 'pH 5.5 di ambang bawah rentang normal', 'Perlu konfirmasi dengan pemeriksaan lanjut']
+        label: 'Dark Orange (C)', swatch: 'rgb(207,59,0)', ph: 5.5, r: 207, g: 59, b: 0, status: 'Mild Dehydration',
+        hints: ['Very low G (59) — minimal green component', 'pH 5.5 at the lower threshold of normal', 'Further testing recommended for confirmation']
       },
       {
-        label: 'Oranye Kemerahan (D)', swatch: 'rgb(219,40,0)', ph: 6.8, r: 219, g: 40, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['G sangat rendah (40) meski pH cukup baik (6.8)', 'Contoh ketidaksesuaian warna vs pH', 'Faktor makanan kemungkinan memengaruhi warna']
+        label: 'Reddish Orange (D)', swatch: 'rgb(219,40,0)', ph: 6.8, r: 219, g: 40, b: 0, status: 'Mild Dehydration',
+        hints: ['Very low G (40) despite acceptable pH (6.8)', 'Example of color vs pH mismatch', 'Food intake likely influencing color reading']
       },
       {
-        label: 'Kuning Oranye (E)', swatch: 'rgb(219,79,0)', ph: 6.4, r: 219, g: 79, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['pH 6.4, sedikit di bawah rentang ideal 6.5–7.5', 'R dominan menunjukkan urin masih cukup pekat', 'Monitor asupan cairan dan pola makan']
+        label: 'Yellow-Orange (E)', swatch: 'rgb(219,79,0)', ph: 6.4, r: 219, g: 79, b: 0, status: 'Mild Dehydration',
+        hints: ['pH 6.4 — slightly below ideal range of 6.5–7.5', 'Dominant R indicates still-concentrated urine', 'Monitor fluid intake and dietary habits']
       },
       {
-        label: 'Kuning Pekat (F)', swatch: 'rgb(231,99,0)', ph: 6.3, r: 231, g: 99, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['R tertinggi (231) dalam kelompok ini', 'B masih 0, urin pekat', 'Pola pH+warna konsisten dengan urin terkonsentrasi']
+        label: 'Deep Yellow (F)', swatch: 'rgb(231,99,0)', ph: 6.3, r: 231, g: 99, b: 0, status: 'Mild Dehydration',
+        hints: ['Highest R value (231) in this group', 'B still at 0, indicating concentrated urine', 'pH + color pattern consistent with concentrated urine']
       },
       {
-        label: 'Kuning Sedang (G)', swatch: 'rgb(195,40,0)', ph: 7.5, r: 195, g: 40, b: 0, status: 'Dehidrasi Ringan',
-        hints: ['pH 7.5 — batas atas normal, perhatikan', 'R cukup tinggi meski pH sudah baik', 'Jika pH naik lebih tinggi, cek kemungkinan ISK']
+        label: 'Medium Yellow (G)', swatch: 'rgb(195,40,0)', ph: 7.5, r: 195, g: 40, b: 0, status: 'Mild Dehydration',
+        hints: ['pH 7.5 — upper limit of normal, worth monitoring', 'R remains high despite adequate pH', 'If pH rises further, consider checking for UTI']
       },
       {
-        label: 'Kuning Jernih (H)', swatch: 'rgb(233,174,6)', ph: 6.8, r: 233, g: 174, b: 6, status: 'Dehidrasi Ringan',
-        hints: ['G meningkat (174), B mulai muncul (6)', 'pH 6.8 — mendekati rentang ideal', 'Urin mulai menuju kondisi lebih sehat']
+        label: 'Clear Yellow (H)', swatch: 'rgb(233,174,6)', ph: 6.8, r: 233, g: 174, b: 6, status: 'Mild Dehydration',
+        hints: ['G increasing (174), B beginning to appear (6)', 'pH 6.8 — approaching ideal range', 'Urine trending toward healthier profile']
       },
       {
-        label: 'Kuning Pucat (I)', swatch: 'rgb(228,158,30)', ph: 7.8, r: 228, g: 158, b: 30, status: 'Tidak Dehidrasi',
-        hints: ['pH 7.8 melebihi 7.5 — perlu perhatian', 'B=30 menunjukkan urin lebih encer', 'pH di atas 7.5 bisa indikasi ISK — cek gejala tambahan']
+        label: 'Pale Yellow (I)', swatch: 'rgb(228,158,30)', ph: 7.8, r: 228, g: 158, b: 30, status: 'Not Dehydrated',
+        hints: ['pH 7.8 exceeds 7.5 — requires attention', 'B=30 indicates more dilute urine', 'pH above 7.5 may indicate UTI — check for symptoms']
       },
       {
-        label: 'Kuning Cerah (J)', swatch: 'rgb(255,215,60)', ph: 7.0, r: 255, g: 215, b: 60, status: 'Tidak Dehidrasi',
-        hints: ['G tinggi (215), B=60 — warna ideal sehat', 'pH 7.0 dalam rentang normal optimal', 'Profil ini mendekati kondisi urin ideal']
+        label: 'Bright Yellow (J)', swatch: 'rgb(255,215,60)', ph: 7.0, r: 255, g: 215, b: 60, status: 'Not Dehydrated',
+        hints: ['High G (215), B=60 — ideal healthy color profile', 'pH 7.0 within optimal normal range', 'This profile closely matches an ideal urine condition']
       },
       {
-        label: 'Kuning Sangat Pucat (K)', swatch: 'rgb(255,235,77)', ph: 6.0, r: 255, g: 235, b: 77, status: 'Dehidrasi Ringan',
-        hints: ['Kasus khusus: warna sangat cerah tapi pH 6.0', 'Warna dipengaruhi makanan — pH tetap valid', 'Bukti pentingnya sensor pH sebagai koreksi sensor warna']
+        label: 'Very Pale Yellow (K)', swatch: 'rgb(255,235,77)', ph: 6.0, r: 255, g: 235, b: 77, status: 'Mild Dehydration',
+        hints: ['Special case: very bright color yet pH 6.0', 'Color influenced by food — pH remains valid', 'Evidence that pH corrects misleading color sensor data']
       },
       {
-        label: 'Jernih Kekuningan (L)', swatch: 'rgb(255,255,135)', ph: 6.1, r: 255, g: 255, b: 135, status: 'Dehidrasi Ringan',
-        hints: ['G=255, B=135 — paling terang dalam dataset', 'pH 6.1 tetap menunjukkan kondisi kurang optimal', 'Ilustrasi keterbatasan sensor warna tanpa koreksi pH']
+        label: 'Almost Clear (L)', swatch: 'rgb(255,255,135)', ph: 6.1, r: 255, g: 255, b: 135, status: 'Mild Dehydration',
+        hints: ['G=255, B=135 — brightest sample in the dataset', 'pH 6.1 still indicates suboptimal condition', 'Illustrates the limitation of color sensors alone without pH correction']
       }
     ];
 
     const sampleData = [
-      { s: 'A', ps: 5.3, pm: 5.3, err: 0, r: 207, g: 79, b: 0, status: 'Dehidrasi Berat' },
-      { s: 'B', ps: 6.0, pm: 6.0, err: 0, r: 231, g: 99, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'C', ps: 5.5, pm: 5.5, err: 0, r: 207, g: 59, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'D', ps: 6.8, pm: 6.8, err: 0, r: 219, g: 40, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'E', ps: 6.4, pm: 6.3, err: 1.58, r: 219, g: 79, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'F', ps: 6.3, pm: 6.3, err: 0, r: 231, g: 99, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'G', ps: 7.5, pm: 7.6, err: -1.31, r: 195, g: 40, b: 0, status: 'Dehidrasi Ringan' },
-      { s: 'H', ps: 6.8, pm: 6.9, err: -1.44, r: 233, g: 174, b: 6, status: 'Dehidrasi Ringan' },
-      { s: 'I', ps: 7.8, pm: 7.9, err: -1.26, r: 228, g: 158, b: 30, status: 'Tidak Dehidrasi' },
-      { s: 'J', ps: 7.0, pm: 7.1, err: -1.40, r: 255, g: 215, b: 60, status: 'Tidak Dehidrasi' },
-      { s: 'K', ps: 6.0, pm: 6.0, err: 0, r: 255, g: 235, b: 77, status: 'Dehidrasi Ringan' },
-      { s: 'L', ps: 6.1, pm: 6.2, err: -1.61, r: 255, g: 255, b: 135, status: 'Dehidrasi Ringan' }
+      { s: 'A', ps: 5.3, pm: 5.3, err: 0, r: 207, g: 79, b: 0, status: 'Severe Dehydration' },
+      { s: 'B', ps: 6.0, pm: 6.0, err: 0, r: 231, g: 99, b: 0, status: 'Mild Dehydration' },
+      { s: 'C', ps: 5.5, pm: 5.5, err: 0, r: 207, g: 59, b: 0, status: 'Mild Dehydration' },
+      { s: 'D', ps: 6.8, pm: 6.8, err: 0, r: 219, g: 40, b: 0, status: 'Mild Dehydration' },
+      { s: 'E', ps: 6.4, pm: 6.3, err: 1.58, r: 219, g: 79, b: 0, status: 'Mild Dehydration' },
+      { s: 'F', ps: 6.3, pm: 6.3, err: 0, r: 231, g: 99, b: 0, status: 'Mild Dehydration' },
+      { s: 'G', ps: 7.5, pm: 7.6, err: -1.31, r: 195, g: 40, b: 0, status: 'Mild Dehydration' },
+      { s: 'H', ps: 6.8, pm: 6.9, err: -1.44, r: 233, g: 174, b: 6, status: 'Mild Dehydration' },
+      { s: 'I', ps: 7.8, pm: 7.9, err: -1.26, r: 228, g: 158, b: 30, status: 'Not Dehydrated' },
+      { s: 'J', ps: 7.0, pm: 7.1, err: -1.40, r: 255, g: 215, b: 60, status: 'Not Dehydrated' },
+      { s: 'K', ps: 6.0, pm: 6.0, err: 0, r: 255, g: 235, b: 77, status: 'Mild Dehydration' },
+      { s: 'L', ps: 6.1, pm: 6.2, err: -1.61, r: 255, g: 255, b: 135, status: 'Mild Dehydration' }
     ];
 
     // ===== RENDER CONDITIONS =====
@@ -1718,11 +1717,11 @@
       </div>
       <div class="detail-body">
         <div class="detail-col">
-          <h4>Mekanisme</h4>
+          <h4>Mechanism</h4>
           <p>${d.what}</p>
         </div>
         <div class="detail-col">
-          <h4>Tanda-tanda pada Urin</h4>
+          <h4>Urine Warning Signs</h4>
           <ul>${d.signs.map(s => `<li>${s}</li>`).join('')}</ul>
         </div>
       </div>
@@ -1740,35 +1739,34 @@
       let title, advice;
 
       if (ph < 5.5) {
-        title = 'pH Sangat Asam';
-        risks.push({ name: 'Gangguan Ginjal', pct: 75, color: 'var(--cyan)' });
-        risks.push({ name: 'Diabetes / KAD', pct: 80, color: 'var(--amber)' });
-        risks.push({ name: 'Gangguan Metabolik', pct: 65, color: 'var(--purple)' });
-        advice = 'pH ' + ph.toFixed(1) + ' sangat rendah — menunjukkan beban asam metabolik yang tinggi. Dapat mengindikasikan ketoasidosis diabetik, gagal ginjal, atau gangguan metabolik berat. Segera periksakan diri ke dokter, terutama jika disertai mual, lelah ekstrem, atau napas cepat.';
+        title = 'Very Acidic pH';
+        risks.push({ name: 'Kidney Disorder', pct: 75, color: 'var(--cyan)' });
+        risks.push({ name: 'Diabetes / DKA', pct: 80, color: 'var(--amber)' });
+        risks.push({ name: 'Metabolic Disorder', pct: 65, color: 'var(--purple)' });
+        advice = 'pH ' + ph.toFixed(1) + ' is very low — indicating a high metabolic acid load. This may point to diabetic ketoacidosis, kidney failure, or a serious metabolic disorder. Seek medical evaluation promptly, especially if accompanied by nausea, extreme fatigue, or rapid breathing.';
       } else if (ph > 7.8) {
-        title = 'pH Terlalu Basa';
-        risks.push({ name: 'Infeksi Saluran Kemih', pct: 82, color: 'var(--red)' });
-        risks.push({ name: 'Asidosis Tubular Ginjal', pct: 58, color: 'var(--cyan)' });
-        risks.push({ name: 'Alkalosis (Muntah Kronis)', pct: 45, color: 'var(--purple)' });
-        advice = 'pH ' + ph.toFixed(1) + ' di atas normal. pH tinggi sering dikaitkan dengan infeksi bakteri di saluran kemih (ISK) karena bakteri memecah urea menjadi amonia. Cek apakah ada gejala seperti panas saat kencing, sering kencing, atau urin keruh.';
+        title = 'Alkaline pH';
+        risks.push({ name: 'Urinary Tract Infection', pct: 82, color: 'var(--red)' });
+        risks.push({ name: 'Renal Tubular Acidosis', pct: 58, color: 'var(--cyan)' });
+        risks.push({ name: 'Alkalosis (Chronic Vomiting)', pct: 45, color: 'var(--purple)' });
+        advice = 'pH ' + ph.toFixed(1) + ' is above the normal range. High pH is commonly linked to bacterial UTI, as bacteria break down urea into ammonia. Check for symptoms such as burning urination, frequent urge to urinate, or cloudy urine.';
       } else if (ph >= 7.0 && ph <= 7.8 && b < 20) {
-        title = 'Perhatian Ringan';
-        risks.push({ name: 'Infeksi Saluran Kemih', pct: 35, color: 'var(--red)' });
-        risks.push({ name: 'Kondisi Normal', pct: 65, color: 'var(--green)' });
-        advice = 'pH ' + ph.toFixed(1) + ' masih dalam rentang dapat diterima, namun komponen Blue (' + b + ') yang sangat rendah menunjukkan urin cukup pekat. Pastikan asupan cairan cukup dan pantau jika ada gejala lain.';
+        title = 'Mild Concern';
+        risks.push({ name: 'Urinary Tract Infection', pct: 35, color: 'var(--red)' });
+        risks.push({ name: 'Normal Condition', pct: 65, color: 'var(--green)' });
+        advice = 'pH ' + ph.toFixed(1) + ' is within an acceptable range, but a very low Blue value (' + b + ') suggests concentrated urine. Ensure adequate fluid intake and monitor for any additional symptoms.';
       } else if (ph >= 6.5 && ph <= 7.5) {
-        title = 'Kondisi Normal';
-        risks.push({ name: 'Kondisi Sehat', pct: 85, color: 'var(--green)' });
-        risks.push({ name: 'Faktor Makanan', pct: 20, color: 'var(--amber)' });
-        advice = 'pH ' + ph.toFixed(1) + ' berada dalam rentang normal optimal (6.5–7.5). Fungsi ginjal kemungkinan baik. Warna RGB (' + r + ',' + g + ',' + b + ') dapat dipengaruhi makanan — pH tetap menjadi indikator utama yang lebih akurat.';
+        title = 'Normal Condition';
+        risks.push({ name: 'Healthy', pct: 85, color: 'var(--green)' });
+        risks.push({ name: 'Food/Diet Influence', pct: 20, color: 'var(--amber)' });
+        advice = 'pH ' + ph.toFixed(1) + ' falls within the optimal normal range (6.5–7.5). Kidney function is likely healthy. The RGB values (' + r + ',' + g + ',' + b + ') may be influenced by food or medication — pH remains the more accurate indicator.';
       } else {
-        title = 'Perlu Pemantauan';
-        risks.push({ name: 'Beban Asam Metabolik', pct: 50, color: 'var(--amber)' });
-        risks.push({ name: 'Gangguan Ginjal Awal', pct: 40, color: 'var(--cyan)' });
-        risks.push({ name: 'Kondisi Normal', pct: 30, color: 'var(--green)' });
-        advice = 'pH ' + ph.toFixed(1) + ' sedikit di luar rentang ideal. Bisa normal atau awal dari gangguan metabolik. Monitor secara berkala, pastikan asupan cairan cukup, dan konsultasikan jika nilai pH konsisten di luar rentang ini.';
+        title = 'Monitor Closely';
+        risks.push({ name: 'Metabolic Acid Load', pct: 50, color: 'var(--amber)' });
+        risks.push({ name: 'Early Kidney Concern', pct: 40, color: 'var(--cyan)' });
+        risks.push({ name: 'Normal Variation', pct: 30, color: 'var(--green)' });
+        advice = 'pH ' + ph.toFixed(1) + ' is slightly outside the ideal range. This may be a normal variation or an early sign of a metabolic imbalance. Monitor regularly and consult a doctor if this pH level persists.';
       }
-
       return { title, risks, advice };
     }
 
@@ -1793,11 +1791,11 @@
 
       const res = getCheckerResult(ph, r, g, b);
       document.getElementById('resTitle').textContent = res.title;
-      const titleColors = { 'Kondisi Normal': 'var(--green)', 'Perhatian Ringan': 'var(--amber)', 'Perlu Pemantauan': 'var(--amber)', 'pH Sangat Asam': 'var(--red)', 'pH Terlalu Basa': 'var(--red)' };
+      const titleColors = { 'Normal Condition': 'var(--green)', 'Mild Concern': 'var(--amber)', 'Monitor Closely': 'var(--amber)', 'Very Acidic pH': 'var(--red)', 'Alkaline pH': 'var(--red)' };
       document.getElementById('resTitle').style.color = titleColors[res.title] || 'var(--text)';
 
       document.getElementById('riskBars').innerHTML = `
-    <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.6rem">Kemungkinan Kondisi Terkait</div>
+    <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.6rem">Possible Related Conditions</div>
     ${res.risks.map(rk => `
       <div class="risk-bar-row">
         <span class="risk-name">${rk.name}</span>
@@ -1824,13 +1822,13 @@
 
       document.getElementById('detailMeta').innerHTML = `
     <div class="meta-cell"><div class="meta-k">pH Sensor</div><div class="meta-v" style="color:var(--cyan)">${d.ph.toFixed(1)}</div></div>
-    <div class="meta-cell"><div class="meta-k">Status</div><div class="meta-v" style="font-size:.85rem;color:${d.status === 'Tidak Dehidrasi' ? 'var(--green)' : 'var(--amber)'}">${d.status}</div></div>
+    <div class="meta-cell"><div class="meta-k">Status</div><div class="meta-v" style="font-size:.85rem;color:${d.status === 'Not Dehydrated' ? 'var(--green)' : 'var(--amber)'}">${d.status}</div></div>
     <div class="meta-cell"><div class="meta-k">Red</div><div class="meta-v" style="color:#f87171">${d.r}</div></div>
     <div class="meta-cell"><div class="meta-k">Blue</div><div class="meta-v" style="color:#38bdf8">${d.b}</div></div>
   `;
 
       document.getElementById('condHints').innerHTML = `
-    <h4>Interpretasi Klinis</h4>
+    <h4>Clinical Interpretation</h4>
     ${d.hints.map(h => `<div class="hint-item">${h}</div>`).join('')}
   `;
     }
@@ -1860,8 +1858,8 @@
     // ===== DATA TABLE =====
     const tbody = document.getElementById('dataBody');
     sampleData.forEach(d => {
-      const sc = d.status === 'Tidak Dehidrasi' ? 'var(--green)' : d.status === 'Dehidrasi Berat' ? 'var(--red)' : 'var(--amber)';
-      const sb = d.status === 'Tidak Dehidrasi' ? 'var(--green-dim)' : d.status === 'Dehidrasi Berat' ? 'var(--red-dim)' : 'var(--amber-dim)';
+      const sc = d.status === 'Not Dehydrated' ? 'var(--green)' : d.status === 'Severe Dehydration' ? 'var(--red)' : 'var(--amber)';
+      const sb = d.status === 'Not Dehydrated' ? 'var(--green-dim)' : d.status === 'Severe Dehydration' ? 'var(--red-dim)' : 'var(--amber-dim)';
       const ec = d.err === 0 ? 'var(--green)' : Math.abs(d.err) > 1 ? 'var(--amber)' : 'var(--text2)';
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -1881,7 +1879,7 @@
     // ===== MOBILE MENU TOGGLE =====
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
-    
+
     if (navToggle && navLinks) {
       navToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
@@ -1889,7 +1887,7 @@
         navToggle.setAttribute('aria-expanded', isOpen);
         navToggle.textContent = isOpen ? '✕' : '☰';
       });
-      
+
       // Close menu when clicking on a link
       navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
@@ -1898,7 +1896,7 @@
           navToggle.textContent = '☰';
         });
       });
-      
+
       // Close menu when clicking outside
       document.addEventListener('click', (e) => {
         if (!nav.contains(e.target)) {
